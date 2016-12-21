@@ -9,6 +9,7 @@ Lets start with a basic command that will import the list of cities to our datab
 migration looks as follows:
 
 `php artisan make:model City --migration`
+
 ```php
 <?php
 
@@ -46,7 +47,8 @@ class CreateCitiesTable extends Migration
         Schema::dropIfExists('cities');
     }
 }
-```  
+```
+
 Add `public $timestamps = false;` to your `City`model since we don't need timestamps.
 
 Notice the column `n_grams`, this will help us later to achieve the did you mean functionality.
@@ -55,8 +57,8 @@ Now, lets prepopulate the table. Our dataset is a regular file where each line r
 A simple command will do the job:
 
 `php artisan make:command ImportCities`
-```php
 
+```php
 <?php
 
 namespace App\Console\Commands;
@@ -186,9 +188,10 @@ class ImportCities extends Command
         return utf8_encode($this->tnt->buildTrigrams($word));
     }
 }
-
+```
 
 Don't forget to register the command in `app\Console\Kernel.php`
+
 ```php
 <?php
 
@@ -200,4 +203,3 @@ Don't forget to register the command in `app\Console\Kernel.php`
 The createNGrams method requires TNTSearch, so before running the command run:
 
 `composer require teamtnt/tntsearch`
-     * Run the migrations.
