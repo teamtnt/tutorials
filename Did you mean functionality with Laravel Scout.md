@@ -36,7 +36,7 @@ In `config/scout.php` set the `storage_path`
 'tntsearch' => [
     'storage'  => storage_path(),
 ],
-``
+```
 
 Make sure this directory is writable.
 
