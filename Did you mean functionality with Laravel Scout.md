@@ -1,16 +1,11 @@
 ![Imgur](http://i.imgur.com/aEmSYNZ.jpg)
 
 In this tutorial we'll show you how to create "Did you mean" functionality fast and easy.
-
 Data we'll use will be a large city database consisting of more than 3 million cities. The idea is to show the correct city name in case you users misspell them. 
-
 The list of cities comes from MaxMind, Inc, you can find the list
 [here](https://www.maxmind.com/en/free-world-cities-database). 
-
 To understand what we are building take a look at the [demo page](http://cities.tnt.studio/)
-
 Setting up Laravel isn't covered, but you can find plenty of tutorials on how to do this. 
-
 Our project will depend on Laravel Scout and TNTSearch so lets install those dependencies:
 
 `composer require teamtnt/laravel-scout-tntsearch-driver`
@@ -44,9 +39,7 @@ In `config/scout.php` set the `storage_path`
 ```
 
 Make sure this directory is writable.
-
 Lets start with a basic command that will download and import the list of cities to our database. 
-
 The database migration and the model looks as follows:
 
 `php artisan make:model City --migration`
@@ -91,11 +84,8 @@ class CreateCitiesTable extends Migration
 ```
 
 Add `public $timestamps = false;` to your `City` model since we don't need timestamps.
-
 Notice the column `n_grams`, this will help us later to achieve the did you mean functionality.
-
 Now, lets populate the table. Our dataset is a regular file where each line represents a city.
-
 A simple command will do the job:
 
 `php artisan make:command ImportCities`
@@ -221,9 +211,7 @@ Don't forget to register the command in `app\Console\Kernel.php`
 
 The command will automatically download the file from Maxmind, unzip it and import the
 cities to our database. 
-
 We'll only import cities that have a population greater than 0.
-
 Once we have the cities in our database, let's create the inverted index that scout will
 consume.
 
@@ -342,6 +330,35 @@ class CityController extends Controller
     }
 }
 ```
+## How does it work
+
+We threw a lot of code at you above. Although this will work perfectly
+it's also important that you understand why it's working and what the
+logic behind is. Let's for example take the city "Berlin". Now, if
+we break it into trigrams we become the following:
+
+`__b _be ber erl rli lin in_ n__`
+
+Let's assume you make a typo and instead of Berlin you type "Berln".
+The trigrams now look like:
+
+`__b _be ber erl rln ln_ n__`
+
+As you can see, 5 trigrams match the trigrams from the correct form
+and only 2 don't match.
+
+![Imgur](http://i.imgur.com/E9JLkwk.jpg)
+
+Each trigram set of the correct form is stored in `cityngrams.index`.
+If we query the index with a misstyped  word "berln" well get pretty
+accurate results since 5 matches were found. It will also return some
+other results that match the trigrams so we'll have to do one more step 
+to get the best suggestions possible. The levenshtein distance between 
+two words will simply tell us how many characters we need to change to 
+get the same word. So the levenshtein distance between "Berlin" and "Berln" 
+is 1 because we only need to add an "i" for the words to match. So we'll sort
+our result from our `cityngrams.index` by levensthein distance and return
+the suggestins to the user. Pretty simple but powerfull, isn't it?
 
 The front end of the [demo page](http://cities.tnt.studio/) is build with [react](https://facebook.github.io/react/).
 In the upcoming months will create an on-line course on how to get started with React and Laravel
