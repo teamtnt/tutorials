@@ -2,9 +2,9 @@
 
 In this tutorial, we'll show you how to create "Did you mean" functionality fast and easy.
 Data we'll use will be a large city database consisting of more than 3 million cities. The idea is to show the correct city name in case your users misspell them. 
-The list of cities comes from MaxMind, Inc, you can find the list
+The list of cities comes from MaxMind, Inc and you can find the list
 [here](https://www.maxmind.com/en/free-world-cities-database). 
-To understand what we are building take a look at the [demo page](http://cities.tnt.studio/)
+To understand what we are building take a look at the [demo page](http://cities.tnt.studio/).
 Setting up Laravel isn't covered, but you can find plenty of tutorials on how to do this. 
 Our project will depend on Laravel Scout and TNTSearch so lets install those dependencies:
 
