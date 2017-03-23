@@ -5,19 +5,19 @@ Sooner or later you’ll find yourself building an application that deals with g
 
 Some basic geographic terminology is required so we’ll start with longitude and latitude. Let’s imagine the world as a ball. If we draw vertical lines that are spaced equally, we’ll get lines of longitude
 
-![](2017-03-23/globe-longitude.jpg)
+![globe-longitude](https://cloud.githubusercontent.com/assets/824840/24270000/b1cb6372-1013-11e7-9c94-0839e7856a3f.jpg)
 
 If we do the same but this time drawing lines horizontally, we’ll get lines of latitude.
 
-![](2017-03-23/globe-latitude.jpg)
+![globe-latitude](https://cloud.githubusercontent.com/assets/824840/24270007/bb913f8a-1013-11e7-9297-7ed0dfb8732f.jpg)
 
 Any point on our imaginary ball can be represented with longitude and latitude.
 
-![](2017-03-23/globe-point.jpg)
+![globe-point](https://cloud.githubusercontent.com/assets/824840/24270011/c611b14c-1013-11e7-8573-cdea387174de.jpg)
 
 If we have two points located somewhere on our ball, we can calculate their shortest distance with the haversine formula
 
-![](2017-03-23/haversine-formula.png)
+<img width="439" alt="haversine-formula" src="https://cloud.githubusercontent.com/assets/824840/24270027/d27a7c2a-1013-11e7-8000-bc85a3f7f9ea.png">
 
 Don’t worry about the math behind for now, just know that this gives you the shortest distance.
 
@@ -30,7 +30,7 @@ As you can see, this approach isn’t very effective, it’s a brute force appro
 I think we can do better. If our search radius is 30km, do we really need to check the points that are maybe on the north or south pole? I guess we don’t. Let say we are in New York L(40.712784, -74.005941).
 It makes sense to check only the places that have the latitude between 40.712784 + 30km and 40.712784 - 30km, right? Because every thing else will be out of our boundaries. The same goes for longitude, so we need to check the distance between -74.005941 + 30km and -74.005941 - 30km. Ok, so you see that I’m mixing kilometres here with longitude and latitude. Longitude and latitude are in degrees and kilometres are, well, in kilometres, you cannot sum them just like that. What we need to do first, is to calculate how many kilometres is one degree of latitude and how many is one kilometre of longitude. Lets start simple.
 
-![](2017-03-23/globe-cut.jpg)
+![globe-cut](https://cloud.githubusercontent.com/assets/824840/24270042/de313216-1013-11e7-931a-86a252a8e9cb.jpg)
 
 We know that there are 90 degrees from the equator to the north pole and also we know that there are 10000km from equator to the north pole. Doing the calculation is easy. One degree represents 111,111km. Note that the distance of 10000 kilometers was defined when the metric system was introduced. Today we’ know that the number is a little bit different because of the earth curvature so 111.045km per latitude degree is a better fit.
 Calculating  longitude km per degree bit different, because the lines of longitude get closer together on north and south pole. So the formula would be 
