@@ -319,7 +319,7 @@ class CityController extends Controller
     public function getSuggestions(Request $request)
     {
         $TNTIndexer = new TNTIndexer;
-        $trigrams   = $TNTIndexer->buildTrigrams($request->get('city'));
+        $trigrams   = utf8_encode($TNTIndexer->buildTrigrams($request->get('city')));
 
         $tnt = new TNTSearch;
 
