@@ -60,7 +60,8 @@ $classifier->save('./path/to/comments.cls');
 
 What this piece of code does is it simply takes the .csv file containing the comments
 together with their category which can be either SPAM or HAM and teaches the classifier.
-After that, the trained model is saved to disk to ./path/to/comments.cls
+After that, the trained model is saved to disk to `./path/to/comments.cls`
+
 That's it, this is how you train your model. You only need to do the training once. The
 larger the dataset the better because the predictions will be more accurate.
 Now that we have a trained model, predicting if a comment is SPAM or not is easy. In your
