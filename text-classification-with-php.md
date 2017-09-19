@@ -86,4 +86,5 @@ The above code is very simple. We load the model from disk and ask the classifie
 us what the prediction might be.
 
 We did some tests with large datasets and the performance and accuracy are astonishing. The
-SPAM/HAM SMS classification test has a score of `98.4753%
+SPAM/HAM SMS classification test has a score of `98.4753%`
+
