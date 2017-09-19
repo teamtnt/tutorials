@@ -6,7 +6,7 @@ You'll start asking yourself if PHP is suitable to get into the race.
 It's true that machine learning tasks are CPU intensive, but speed of the
 language isn't everything.
 
-With the (TNTSearch)[https://github.com/teamtnt/tntsearch] project, we try to bring to you state of the art algorithms
+With the [TNTSearch](https://github.com/teamtnt/tntsearch) project, we try to bring to you state of the art algorithms
 implemented in pure PHP. Those algorithms give first class results and are meant
 to be used in real app scenarios. This tutorial will cover text classification.
 
