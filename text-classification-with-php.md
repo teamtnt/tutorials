@@ -6,7 +6,7 @@ You'll start asking yourself if PHP is suitable to get into the race.
 It's true that machine learning tasks are CPU intensive, but speed of the
 language isn't everything.
 
-With the TNTSearch project, we try to bring to you state of the art algorithms
+With the (TNTSearch)[https://github.com/teamtnt/tntsearch] project, we try to bring to you state of the art algorithms
 implemented in pure PHP. Those algorithms give first class results and are meant
 to be used in real app scenarios. This tutorial will cover text classification.
 
@@ -34,12 +34,13 @@ which is, by the way, a search engine entirely written in PHP but also has some 
 like classification, which is part of information retrieval, and this is of course also
 machine learning. So, installing
 
-composer require teamtnt/tntsearch
+`composer require teamtnt/tntsearch`
 
-In the root of your project create a classify.php file. This is of course only a suggestion,
+In the root of your project create a `classify.php` file. This is of course only a suggestion,
 you'll probably be using a framework like laravel and you are most likely to create an
 artisan command for this. But here, we'll keep it simple.
 
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -55,6 +56,7 @@ foreach ($comments as $comment) {
 }
 
 $classifier->save('./path/to/comments.cls');
+```
 
 What this piece of code does is it simply takes the .csv file containing the comments
 together with their category which can be either SPAM or HAM and teaches the classifier.
@@ -64,6 +66,7 @@ larger the dataset the better because the predictions will be more accurate.
 Now that we have a trained model, predicting if a comment is SPAM or not is easy. In your
 guess.php file, you'll have the following:
 
+```php
 <?php
 
 require __DIR__ . '/vendor/autoload.php';
@@ -76,9 +79,10 @@ $classifier->load('./path/to/comments.cls');
 $guess = $classfier->predict('This is a nice post');
 
 echo $guess['label'];
+```
 
 The above code is very simple. We load the model from disk and ask the classifier to tell
 us what the prediction might be.
 
 We did some tests with large datasets and the performance and accuracy are astonishing. The
-SPAM/HAM SMS classification test has a score of 98.4753%
+SPAM/HAM SMS classification test has a score of `98.4753%
