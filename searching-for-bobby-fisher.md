@@ -3,10 +3,9 @@
 In modern web applications, a common requirement is a search feature. 
 Clients are spoiled by Google and other search engines and expect a 
 powerful search experience in their own products. In this tutorial, 
-we'll cover how to search your user base and sequentially make yourself 
-or your clients happy.
+we'll cover how to search your user base and sequentially make yourself or your clients happy.
 
-If you worked on a medium sized or larger application, assuming you have 
+If you worked on a medium-sized or larger application, assuming you have 
 a typical "users" table, you came up with a solution yourself like:
 
     public function scopeSearchByKeyword($query, $keyword)
@@ -37,11 +36,11 @@ means that the DB engine needs to go through every single row to see if there's 
 that's bad... not to mention slow!
 
 If you introduce more fields, you'll have even more permutations in your code so you'll end up 
-with a nonperformat and nonreadable query.
+with a nonperformant and nonreadable query.
 
 The solution to this problem is a [package](https://github.com/teamtnt/tntsearch) written in pure PHP 
 that deals with this stuff and lets you do some cool things. Laravel also introduced a driver based solution
-for fulltext search which works nicely with TNTSearch.
+for full-text search which works nicely with TNTSearch.
 
 The installation process is easy and can be done with the following command
 
@@ -82,8 +81,7 @@ In your `config/scout.php` add:
 ],
 ```
 
-The first thing is creating the index and the second thing is answering the search 
-queries using the index we created. 
+The first thing is creating the index and the second thing is answering the search queries using the index we created. 
 
 We'll create a laravel command that will do the indexing for us:
 
@@ -173,7 +171,7 @@ And then run:
 
 `php artisan scout:import App\\Post`
 
-Thats it. Doing the search is simple. We'll do this in our `UserController`:
+That's it. Doing the search is simple. We'll do this in our `UserController`:
 
     public function index(Request $request)
     {
@@ -189,8 +187,7 @@ a field called `q`.
 The `searchBoolean` method is a very powerful feature and if you are familiar with
 some basic boolean algebra you'll understand right away how it works. 
 
-Every space represents an `AND` operator so when you type `Bobby Fisher` you are actually 
-asking for every record that contains the words `Bobby` and the word `Fisher`. It translates to
+Every space represents an `AND` operator so when you type `Bobby Fisher` you are actually asking for every record that contains the words `Bobby` and the word `Fisher`. It translates to
 `Bobby AND Fisher`. 
 
 If you want results that contain either Bobby or Fisher you would write `Bobby or Fisher`. 
@@ -201,7 +198,7 @@ The dash `-` represents the negation.
 
 You can also type part of an email like `gmail.com` which will return all users that have a Gmail address. I'm sure you can think of many more examples.
 
-Updating the index manually isn't neccesarry beacuse scout will do it automatically.
+Updating the index manually isn't necessary because scout will do it automatically.
 
 What about scaling you may ask? Will it handle more than 10k users?
 Don't worry, it will scale fine even if you have millions of users.
@@ -214,4 +211,4 @@ In the upcoming versions of the package, you can expect new features like "weigh
 If you like the [package](https://github.com/teamtnt/tntsearch) please star it on Github, it means a lot to have support
 from the community and if you have suggestions please let us know via Github or in comments.
 
-For other cool tutorials subscribe to our newsletter bellow.
+For other cool tutorials subscribe to our newsletter below.
