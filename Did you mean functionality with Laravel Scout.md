@@ -68,6 +68,7 @@ class CreateCitiesTable extends Migration
             $table->float('population');
             $table->double('latitude', 15, 8);
             $table->double('longitude', 15, 8);
+            $table->text('n_grams');
         });
     }
 
@@ -274,8 +275,11 @@ class CreateCityTrigrams extends Command
     }
 }
 ```
+Then run to create index:  
 
-This creates the index of trigrams that we'll query if we don't find anything in our
+`php artisan city:trigrams`
+
+We'll query if we don't find anything in our
 `cities.index`
 
 Our `CityController.php` looks like:
