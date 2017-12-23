@@ -220,7 +220,7 @@ consume.
 
 Ok, now we can do a basic search for a city:
 
-`App\City::serach('Berlin')->get()`
+`App\City::search('Berlin')->get()`
 
 Although this works fine, it's still not able to fetch a city if you make a typo.
 Let's take care of this. 
